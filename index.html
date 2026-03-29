@@ -1,77 +1,69 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Smart Extension Board</title>
-  <style>
-    body {
-      text-align: center;
-      font-family: Arial;
-      background: #121212;
-      color: white;
-    }
-    .switch {
-      margin: 20px;
-    }
-    button {
-      padding: 15px 30px;
-      font-size: 18px;
-      border-radius: 10px;
-      border: none;
-      cursor: pointer;
-    }
-    .on { background: green; }
-    .off { background: red; }
+body {
+  text-align: center;
+  font-family: Arial;
+  color: white;
+  margin: 0;
 
-    input {
-      padding: 8px;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      border: none;
-      text-align: center;
-    }
-  </style>
-</head>
-<body>
+  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c1c1c);
+  background-size: 400% 400%;
+  animation: gradientBG 12s ease infinite;
+}
 
-<h1>⚡ Smart Extension Board</h1>
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-<div class="switch">
-  <input type="text" id="name1" value="Socket 1">
-  <br>
-  <button onclick="toggle(1)" id="btn1" class="off">OFF</button>
-</div>
+h1 {
+  margin: 20px;
+  font-size: 22px;
+}
 
-<div class="switch">
-  <input type="text" id="name2" value="Socket 2">
-  <br>
-  <button onclick="toggle(2)" id="btn2" class="off">OFF</button>
-</div>
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  padding: 10px;
+}
 
-<div class="switch">
-  <input type="text" id="name3" value="Socket 3">
-  <br>
-  <button onclick="toggle(3)" id="btn3" class="off">OFF</button>
-</div>
+.switch {
+  padding: 15px;
+  border-radius: 15px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+}
 
-<div class="switch">
-  <input type="text" id="name4" value="Socket 4">
-  <br>
-  <button onclick="toggle(4)" id="btn4" class="off">OFF</button>
-</div>
+input {
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: none;
+  text-align: center;
+  width: 100%;
+  font-size: 14px;
+}
 
-<script>
-  function toggle(id) {
-    let btn = document.getElementById("btn" + id);
+button {
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.3s;
+}
 
-    if (btn.innerHTML === "OFF") {
-      btn.innerHTML = "ON";
-      btn.className = "on";
-    } else {
-      btn.innerHTML = "OFF";
-      btn.className = "off";
-    }
-  }
-</script>
+.on {
+  background: #00c853;
+  box-shadow: 0 0 15px #00c853;
+}
 
-</body>
-</html>
+.off {
+  background: #d50000;
+  box-shadow: 0 0 15px #d50000;
+}
+
+button:hover {
+  transform: scale(1.05);
+}

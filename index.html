@@ -1,4 +1,10 @@
-body {
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Extension Board</title>
+
+  <style>
+    body {
   text-align: center;
   font-family: Arial;
   color: white;
@@ -67,3 +73,71 @@ button {
 button:hover {
   transform: scale(1.05);
 }
+    }
+  </style>
+
+</head>
+<body>
+
+<h1>⚡ Smart Extension Board</h1>
+
+<div class="container">
+
+  <div class="switch">
+    <input id="name1" onchange="saveName(1)">
+    <button onclick="toggle(1)" id="btn1" class="off">OFF</button>
+  </div>
+
+  <div class="switch">
+    <input id="name2" onchange="saveName(2)">
+    <button onclick="toggle(2)" id="btn2" class="off">OFF</button>
+  </div>
+
+  <div class="switch">
+    <input id="name3" onchange="saveName(3)">
+    <button onclick="toggle(3)" id="btn3" class="off">OFF</button>
+  </div>
+
+  <div class="switch">
+    <input id="name4" onchange="saveName(4)">
+    <button onclick="toggle(4)" id="btn4" class="off">OFF</button>
+  </div>
+
+</div>
+
+<script>
+  const ESP_IP = "http://192.168.1.5"; // 🔥 CHANGE THIS
+
+  // Load saved names
+  for (let i = 1; i <= 4; i++) {
+    let saved = localStorage.getItem("name" + i);
+    document.getElementById("name" + i).value = saved || ("Socket " + i);
+  }
+
+  function saveName(id) {
+    let value = document.getElementById("name" + id).value;
+    localStorage.setItem("name" + id, value);
+  }
+
+  function toggle(id) {
+    let btn = document.getElementById("btn" + id);
+    let state = btn.innerHTML === "OFF" ? "on" : "off";
+
+    fetch(`${ESP_IP}/switch${id}/${state}`)
+      .then(() => {
+        if (state === "on") {
+          btn.innerHTML = "ON";
+          btn.className = "on";
+        } else {
+          btn.innerHTML = "OFF";
+          btn.className = "off";
+        }
+      })
+      .catch(() => {
+        alert("⚠️ ESP32 not connected");
+      });
+  }
+</script>
+
+</body>
+</html>

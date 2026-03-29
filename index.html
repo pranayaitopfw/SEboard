@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Smart Extension Board</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial;
+      background: #121212;
+      color: white;
+    }
+    .switch {
+      margin: 20px;
+    }
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+    .on { background: green; }
+    .off { background: red; }
+  </style>
+</head>
+<body>
 
+<h1>⚡ Smart Extension Board</h1>
+
+<div class="switch">
+  <h3>Socket 1</h3>
+  <button onclick="toggle(1)" id="btn1" class="off">OFF</button>
+</div>
+
+<div class="switch">
+  <h3>Socket 2</h3>
+  <button onclick="toggle(2)" id="btn2" class="off">OFF</button>
+</div>
+
+<div class="switch">
+  <h3>Socket 3</h3>
+  <button onclick="toggle(3)" id="btn3" class="off">OFF</button>
+</div>
+
+<div class="switch">
+  <h3>Socket 4</h3>
+  <button onclick="toggle(4)" id="btn4" class="off">OFF</button>
+</div>
+
+<script>
+  function toggle(id) {
+    let btn = document.getElementById("btn" + id);
+
+    if (btn.innerHTML === "OFF") {
+      btn.innerHTML = "ON";
+      btn.className = "on";
+    } else {
+      btn.innerHTML = "OFF";
+      btn.className = "off";
+    }
+  }
+</script>
+
+</body>
+</html>

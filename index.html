@@ -21,6 +21,14 @@
     }
     .on { background: green; }
     .off { background: red; }
+
+    input {
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+      border: none;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -28,22 +36,26 @@
 <h1>⚡ Smart Extension Board</h1>
 
 <div class="switch">
-  <h3>Socket 1</h3>
+  <input type="text" id="name1" value="Socket 1">
+  <br>
   <button onclick="toggle(1)" id="btn1" class="off">OFF</button>
 </div>
 
 <div class="switch">
-  <h3>Socket 2</h3>
+  <input type="text" id="name2" value="Socket 2">
+  <br>
   <button onclick="toggle(2)" id="btn2" class="off">OFF</button>
 </div>
 
 <div class="switch">
-  <h3>Socket 3</h3>
+  <input type="text" id="name3" value="Socket 3">
+  <br>
   <button onclick="toggle(3)" id="btn3" class="off">OFF</button>
 </div>
 
 <div class="switch">
-  <h3>Socket 4</h3>
+  <input type="text" id="name4" value="Socket 4">
+  <br>
   <button onclick="toggle(4)" id="btn4" class="off">OFF</button>
 </div>
 

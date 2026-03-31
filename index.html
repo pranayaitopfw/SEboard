@@ -1,154 +1,207 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Smart Extension Board</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Extension Board | MIT CSN</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            margin: 0;
+            /* Using the background image you provided */
+            background: #050a14 url('bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-  <style>
-    body {
-  text-align: center;
-  font-family: Arial;
-  color: white;
-  margin: 0;
+        /* Overlay to ensure readability against the busy background */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
+        }
 
-  background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #1c1c1c);
-  background-size: 400% 400%;
-  animation: gradientBG 12s ease infinite;
-}
-.group-tag {
-  font-size: 12px;
-  color: #ccc;
-  background: rgba(255,255,255,0.15);
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 10px;
-  margin-top: -10px;
-  margin-bottom: 10px;
-  letter-spacing: 1px;
-}
+        header {
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
 
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+        .logo-area {
+            font-size: 42px;
+            font-weight: bold;
+            letter-spacing: 5px;
+            text-shadow: 0 0 20px #7000ff, 0 0 30px #00d4ff;
+            margin-bottom: 5px;
+        }
 
-h1 {
-  margin: 20px;
-  font-size: 22px;
-}
+        h1 {
+            margin: 10px 0;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
 
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 15px;
-  padding: 10px;
-}
+        .group-tag {
+            font-size: 12px;
+            color: #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+        }
 
-.switch {
-  padding: 15px;
-  border-radius: 15px;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
-}
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            padding: 20px;
+            max-width: 900px;
+            width: 90%;
+        }
 
-input {
-  padding: 8px;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: none;
-  text-align: center;
-  width: 100%;
-  font-size: 14px;
-}
+        .switch {
+            padding: 20px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+            transition: 0.3s ease;
+        }
 
-button {
-  padding: 12px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  transition: 0.3s;
-}
+        .switch:hover {
+            border: 1px solid rgba(0, 212, 255, 0.5);
+            transform: translateY(-5px);
+        }
 
-.on {
-  background: #00c853;
-  box-shadow: 0 0 15px #00c853;
-}
+        input {
+            background: rgba(0, 0, 0, 0.3);
+            color: #00d4ff;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            text-align: center;
+            width: 80%;
+            font-size: 14px;
+            outline: none;
+        }
 
-.off {
-  background: #d50000;
-  box-shadow: 0 0 15px #d50000;
-}
+        button {
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.4s;
+            text-transform: uppercase;
+        }
 
-button:hover {
-  transform: scale(1.05);
-}
-    }
-  </style>
+        .on {
+            background: linear-gradient(45deg, #00c853, #b2ff59);
+            color: #000;
+            box-shadow: 0 0 20px rgba(0, 200, 83, 0.6);
+        }
 
+        .off {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ff5252;
+            border: 1px solid rgba(255, 82, 82, 0.5);
+            box-shadow: inset 0 0 10px rgba(255, 82, 82, 0.2);
+        }
+
+        button:hover {
+            letter-spacing: 2px;
+        }
+    </style>
 </head>
 <body>
 
-<h1>⚡ Smart Extension Board</h1>
-<p class="group-tag">GROUP FY K 02</p>
+<div class="overlay"></div>
+
+<header>
+    <div class="logo-area">MIT CSN</div>
+    <h1>⚡ Smart Extension Board</h1>
+    <p class="group-tag">GROUP FY K 02</p>
+</header>
 
 <div class="container">
+    <div class="switch">
+        <input id="name1" placeholder="Socket 1" onchange="saveName(1)">
+        <button onclick="toggle(1)" id="btn1" class="off">OFF</button>
+    </div>
 
-  <div class="switch">
-    <input id="name1" onchange="saveName(1)">
-    <button onclick="toggle(1)" id="btn1" class="off">OFF</button>
-  </div>
+    <div class="switch">
+        <input id="name2" placeholder="Socket 2" onchange="saveName(2)">
+        <button onclick="toggle(2)" id="btn2" class="off">OFF</button>
+    </div>
 
-  <div class="switch">
-    <input id="name2" onchange="saveName(2)">
-    <button onclick="toggle(2)" id="btn2" class="off">OFF</button>
-  </div>
+    <div class="switch">
+        <input id="name3" placeholder="Socket 3" onchange="saveName(3)">
+        <button onclick="toggle(3)" id="btn3" class="off">OFF</button>
+    </div>
 
-  <div class="switch">
-    <input id="name3" onchange="saveName(3)">
-    <button onclick="toggle(3)" id="btn3" class="off">OFF</button>
-  </div>
-
-  <div class="switch">
-    <input id="name4" onchange="saveName(4)">
-    <button onclick="toggle(4)" id="btn4" class="off">OFF</button>
-  </div>
-
+    <div class="switch">
+        <input id="name4" placeholder="Socket 4" onchange="saveName(4)">
+        <button onclick="toggle(4)" id="btn4" class="off">OFF</button>
+    </div>
 </div>
 
 <script>
-  const ESP_IP = "http://192.168.1.5"; // 🔥 CHANGE THIS
+    const ESP_IP = "http://192.168.1.5"; 
 
-  // Load saved names
-  for (let i = 1; i <= 4; i++) {
-    let saved = localStorage.getItem("name" + i);
-    document.getElementById("name" + i).value = saved || ("Socket " + i);
-  }
+    // Initialize labels
+    for (let i = 1; i <= 4; i++) {
+        let saved = localStorage.getItem("name" + i);
+        document.getElementById("name" + i).value = saved || ("Socket " + i);
+    }
 
-  function saveName(id) {
-    let value = document.getElementById("name" + id).value;
-    localStorage.setItem("name" + id, value);
-  }
+    function saveName(id) {
+        let value = document.getElementById("name" + id).value;
+        localStorage.setItem("name" + id, value);
+    }
 
-  function toggle(id) {
-    let btn = document.getElementById("btn" + id);
-    let state = btn.innerHTML === "OFF" ? "on" : "off";
+    function toggle(id) {
+        let btn = document.getElementById("btn" + id);
+        let state = btn.innerHTML === "OFF" ? "on" : "off";
 
-    fetch(`${ESP_IP}/switch${id}/${state}`)
-      .then(() => {
-        if (state === "on") {
-          btn.innerHTML = "ON";
-          btn.className = "on";
-        } else {
-          btn.innerHTML = "OFF";
-          btn.className = "off";
-        }
-      })
-      .catch(() => {
-        alert("⚠️ ESP32 not connected");
-      });
-  }
+        // Logic to communicate with ESP32
+        fetch(`${ESP_IP}/switch${id}/${state}`)
+            .then(() => {
+                if (state === "on") {
+                    btn.innerHTML = "ON";
+                    btn.className = "on";
+                } else {
+                    btn.innerHTML = "OFF";
+                    btn.className = "off";
+                }
+            })
+            .catch(() => {
+                // Temporary toggle for UI preview if ESP is not connected
+                console.log("ESP32 not found. Simulating toggle...");
+                if (state === "on") {
+                    btn.innerHTML = "ON";
+                    btn.className = "on";
+                } else {
+                    btn.innerHTML = "OFF";
+                    btn.className = "off";
+                }
+            });
+    }
 </script>
 
 </body>

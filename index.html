@@ -162,46 +162,49 @@
 </div>
 
 <script>
-    const ESP_IP = "http://192.168.1.5"; 
+    const ESP_IP = "http://192.168.1.5"; // 🔥 Ensure this matches your ESP32 IP
 
-    // Initialize labels
-    for (let i = 1; i <= 4; i++) {
-        let saved = localStorage.getItem("name" + i);
-        document.getElementById("name" + i).value = saved || ("Socket " + i);
+  // Load saved names from LocalStorage
+  for (let i = 1; i <= 4; i++) {
+    let saved = localStorage.getItem("name" + i);
+    document.getElementById("name" + i).value = saved || ("Socket " + i);
+  }
+
+  function saveName(id) {
+    let value = document.getElementById("name" + id).value;
+    localStorage.setItem("name" + id, value);
+  }
+
+  async function toggle(id) {
+    let btn = document.getElementById("btn" + id);
+    let currentState = btn.innerHTML === "OFF" ? "on" : "off";
+    
+    // Create a timeout controller (Stop waiting after 3 seconds)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 3000);
+
+    try {
+      const response = await fetch(`${ESP_IP}/switch${id}/${currentState}`, { 
+        signal: controller.signal,
+        mode: 'no-cors' // Use this if you face CORS issues
+      });
+
+      clearTimeout(timeoutId);
+
+      // Update UI on success
+      if (currentState === "on") {
+        btn.innerHTML = "ON";
+        btn.className = "on";
+      } else {
+        btn.innerHTML = "OFF";
+        btn.className = "off";
+      }
+    } catch (error) {
+      // This will trigger if IP is wrong, ESP is off, or timeout occurs
+      console.error("Connection Error:", error);
+      alert("⚠️ ESP32 Not Connected!\nCheck if your phone/PC is on the same Wi-Fi as the board.");
     }
-
-    function saveName(id) {
-        let value = document.getElementById("name" + id).value;
-        localStorage.setItem("name" + id, value);
-    }
-
-    function toggle(id) {
-        let btn = document.getElementById("btn" + id);
-        let state = btn.innerHTML === "OFF" ? "on" : "off";
-
-        // Logic to communicate with ESP32
-        fetch(`${ESP_IP}/switch${id}/${state}`)
-            .then(() => {
-                if (state === "on") {
-                    btn.innerHTML = "ON";
-                    btn.className = "on";
-                } else {
-                    btn.innerHTML = "OFF";
-                    btn.className = "off";
-                }
-            })
-            .catch(() => {
-                // Temporary toggle for UI preview if ESP is not connected
-                console.log("ESP32 not found. Simulating toggle...");
-                if (state === "on") {
-                    btn.innerHTML = "ON";
-                    btn.className = "on";
-                } else {
-                    btn.innerHTML = "OFF";
-                    btn.className = "off";
-                }
-            });
-    }
+  }
 </script>
 
 </body>

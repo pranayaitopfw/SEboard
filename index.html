@@ -195,7 +195,7 @@ async function toggle(id) {
     updateButton(btn, newState); // instant UI
 
     try {
-        await fetch(`${ESP_IP}/switch${id}/${newState}`);
+        await fetch(`${ESP_IP}/status${i}`, { cache: "no-store" });
         document.getElementById("status").innerText = "✅ Connected";
     } catch {
         document.getElementById("status").innerText = "❌ ESP32 Offline";
